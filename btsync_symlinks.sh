@@ -13,6 +13,6 @@ if ! [ -L .zsh_history ]; then
 fi
 
 if ! [ -L .ssh ]; then
-    rm `pwd`/.ssh
+    rm -rf `pwd`/.ssh
     ln -s `pwd`/devbox/.ssh `pwd`/.ssh
 fi
