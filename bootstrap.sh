@@ -25,21 +25,21 @@ sudo apt-get -y clean
 sudo pip install ansible
 sudo pip install boto
 
-wget -qO- https://get.docker.com/ | sh
-sudo usermod -aG docker vagrant
+if ! type docker > /dev/null; then
+	wget -qO- https://get.docker.com/ | sh
+	sudo usermod -aG docker $(whoami)
+fi
 
 ln -s /src projects
 
-cat > /home/vagrant/.bash_login <<EOF
+cat > /home/$(whoami)/.bash_login <<EOF
 sh -c $(curl -fsSL http://debian.yeasoft.net/add-btsync14-repository.sh)
 sudo apt-get install -y btsync
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 chsh -s /bin/zsh
-rm .zshrc || true; ln -s /vagrant/dot_files/.zshrc .
-rm -rf .oh-my-zsh || true; ln -s /vagrant/dot_files/.oh-my-zsh .
-sudo rm /home/vagrant/.bash_login
+sudo rm /home/$(whoami)/.bash_login
 exit
 EOF
-chmod +x /home/vagrant/.bash_login
-sudo chown -R vagrant:vagrant /home/vagrant
-sudo pkill -u vagrant
+chmod +x /home/$(whoami)/.bash_login
+sudo chown -R $(whoami) /home/$(whoami)
+sudo pkill -u $(whoami)
