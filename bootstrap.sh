@@ -30,9 +30,7 @@ if ! type docker > /dev/null; then
 	sudo usermod -aG docker $(whoami)
 fi
 
-exit
-
 sh -c $(curl -fsSL http://debian.yeasoft.net/add-btsync14-repository.sh)
 sudo apt-get install -y btsync
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-chsh -s /bin/zsh
+echo "run 'chsh -s /bin/zsh && sudo pkill -u $(whoami)'"
