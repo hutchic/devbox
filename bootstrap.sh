@@ -30,16 +30,9 @@ if ! type docker > /dev/null; then
 	sudo usermod -aG docker $(whoami)
 fi
 
-ln -s /src projects
+exit
 
-cat > /home/$(whoami)/.bash_login <<EOF
 sh -c $(curl -fsSL http://debian.yeasoft.net/add-btsync14-repository.sh)
 sudo apt-get install -y btsync
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 chsh -s /bin/zsh
-sudo rm /home/$(whoami)/.bash_login
-exit
-EOF
-chmod +x /home/$(whoami)/.bash_login
-sudo chown -R $(whoami) /home/$(whoami)
-sudo pkill -u $(whoami)
