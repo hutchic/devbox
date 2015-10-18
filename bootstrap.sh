@@ -33,4 +33,4 @@ fi
 sh -c $(curl -fsSL http://debian.yeasoft.net/add-btsync14-repository.sh)
 sudo apt-get install -y btsync
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-echo "run 'chsh -s /bin/zsh && sudo pkill -u $(whoami)'"
+echo "run 'chsh -s /bin/zsh && sudo reboot now'"
