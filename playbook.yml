@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  connection: local
+  pre_tasks:
+    - name: Add the docker role
+      become: yes
+      group:
+        name: docker
+        state: present
+
+    - name: Add the vagrant user to the docker role
+      become: yes
+      user:
+        append: yes
+        groups: docker
+        name: vagrant
+      register: docker_group
+  roles:
+    - { role: nexeck.docker, become: yes }
+  post_tasks:
+    - name: Reboot
+      become: yes
+      command: reboot now
+      when: docker_group.changed

@@ -3,4 +3,4 @@
 .vagrant
 .settings
 .pydevproject
-projects
+vagrant_ansible_inventory_default

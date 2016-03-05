@@ -1,1 +1,0 @@
-/vagrant/dot_files/.bash_logout

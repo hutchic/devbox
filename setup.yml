@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Install galaxy requirements
+      become: yes
+      command: ansible-galaxy install -r /vagrant/requirements.yml
+
+    - name: Add apt repositories
+      become: yes
+      apt_repository:
+        repo: "{{ item }}"
+        state: "present"
+      with_items: "{{ apt_repositories }}"
+
+    - name: Install required software (apt)
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: "latest"
+        update_cache: yes
+      with_items: "{{ required_software_apt }}"
+
+    - name: Install required software (pip)
+      become: yes
+      pip:
+        name: "{{ item }}"
+        state: "present"
+      with_items: "{{ required_software_pip }}"

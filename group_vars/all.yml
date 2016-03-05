@@ -1,0 +1,23 @@
+---
+apt_repositories:
+  - deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse
+  - deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse
+  - deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates multiverse
+  - deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}}-updates multiverse
+  - ppa:git-core/ppa
+  - ppa:videolan/stable-daily
+  - ppa:webupd8team/java
+  - ppa:fkrull/deadsnakes-python2.7
+required_software_apt:
+  - software-properties-common
+  - apt-cacher-ng
+  - python
+  - curl
+  - vim
+  - zip
+  - language-pack-en
+  - python-pip
+  - git
+required_software_pip:
+  - ansible
+  - boto
