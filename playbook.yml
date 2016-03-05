@@ -17,7 +17,12 @@
       register: docker_group
   roles:
     - { role: nexeck.docker, become: yes }
+    - { role: rallen-temp.ansible-zsh }
   post_tasks:
+    - name: Change default shell to zsh
+      become: yes
+      command: chsh -s /usr/bin/zsh vagrant
+
     - name: Reboot
       become: yes
       command: reboot now
