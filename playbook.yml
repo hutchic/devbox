@@ -18,10 +18,13 @@
         groups: docker
         name: vagrant
       register: docker_group
+
   roles:
     - { role: nexeck.docker, become: yes }
     - { role: rallen-temp.ansible-zsh }
+    - { role: vcabourdin.chrome, become: yes }
     - { role: hutchic.btsync, become: yes, when: btsync_user.user is defined }
+
   post_tasks:
     - name: Change default shell to zsh
       become: yes

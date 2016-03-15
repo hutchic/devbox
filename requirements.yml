@@ -1,4 +1,5 @@
 - src: nexeck.docker
 - src: rallen-temp.ansible-zsh
+- src: vcabourdin.chrome
 - src: https://github.com/hutchic/ansible-btsync.git
   name: hutchic.btsync
