@@ -21,3 +21,4 @@ required_software_apt:
 required_software_pip:
   - ansible
   - boto
+btsync_user: vagrant
