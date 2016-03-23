@@ -20,6 +20,13 @@
         state: "latest"
         update_cache: yes
       with_items: "{{ required_software_apt }}"
+      ignore_errors: yes
+
+    - name: Upgrade
+      become: yes
+      apt:
+        update_cache: yes
+        upgrade: "yes"
 
     - name: Install required software (pip)
       become: yes

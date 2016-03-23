@@ -18,7 +18,15 @@ required_software_apt:
   - language-pack-en
   - python-pip
   - git
+  - build-essential
+  - virtualbox-guest-dkms
+  - virtualbox-guest-utils
+  - virtualbox-guest-x11
+additional_software:
+  - thunderbird
+
 required_software_pip:
   - ansible
   - boto
+  - virtualenv
 btsync_user: vagrant

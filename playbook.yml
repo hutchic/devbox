@@ -19,16 +19,51 @@
         name: vagrant
       register: docker_group
 
+    - name: Is btsync already installed
+      become: yes
+      stat: path=/usr/local/bin/btsync
+      register: btsync
+
+    - name: Is docker already installed
+      become: yes
+      stat: path=/usr/bin/docker
+      register: docker
+
+    - name: Is zsh already installed
+      become: yes
+      stat: path=/bin/zsh
+      register: zsh
+
+    - name: Is google chrome already installed
+      become: yes
+      stat: path=/usr/bin/google-chrome
+      register: chrome
+
+    - name: Is atom already installed
+      become: yes
+      stat: path=/usr/bin/atom
+      register: atom
+
   roles:
-    - { role: nexeck.docker, become: yes }
-    - { role: rallen-temp.ansible-zsh }
-    - { role: vcabourdin.chrome, become: yes }
-    - { role: hutchic.btsync, become: yes, when: btsync_user.user is defined }
+    - { role: nexeck.docker, become: yes, when: docker.stat.exists == False }
+    - { role: rallen-temp.ansible-zsh, when: zsh.stat.exists == False }
+    - { role: vcabourdin.chrome, become: yes, when: chrome.stat.exists == False }
+    - { role: hutchic.btsync, become: yes, when: btsync_webui.user is defined and btsync.stat.exists == False }
+    - { role: ansibl3.deb_atom, become: yes, when: atom.stat.exists == False }
 
   post_tasks:
     - name: Change default shell to zsh
       become: yes
       command: chsh -s /usr/bin/zsh vagrant
+
+    - name: Install additional software packages
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: "latest"
+        update_cache: yes
+      with_items: "{{ additional_software }}"
+      ignore_errors: yes
 
     - name: Reboot
       become: yes

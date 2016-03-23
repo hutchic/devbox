@@ -3,9 +3,11 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "boxcutter/ubuntu1404-desktop"
+  config.vm.synced_folder "../projects/", "/home/vagrant/projects", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
     vb.memory = "4048"
+    vb.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000 ]
   end
 
   required_plugins = %w( vagrant-guest_ansible )
