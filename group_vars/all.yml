@@ -24,6 +24,8 @@ required_software_apt:
   - virtualbox-guest-x11
 additional_software:
   - thunderbird
+  - nvidia-settings
+  - vlc
 
 required_software_pip:
   - ansible

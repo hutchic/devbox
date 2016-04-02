@@ -6,7 +6,8 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "../projects/", "/home/vagrant/projects", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
-    vb.memory = "4048"
+    vb.memory = "6048"
+    vb.customize ["modifyvm", :id, "--cpus", 2]
     vb.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000 ]
   end
 
