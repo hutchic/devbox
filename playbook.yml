@@ -19,11 +19,6 @@
         name: vagrant
       register: docker_group
 
-    - name: Is btsync already installed
-      become: yes
-      stat: path=/usr/local/bin/btsync
-      register: btsync
-
     - name: Is docker already installed
       become: yes
       stat: path=/usr/bin/docker
@@ -49,6 +44,7 @@
     - { role: rallen-temp.ansible-zsh, when: zsh.stat.exists == False }
     - { role: vcabourdin.chrome, become: yes, when: chrome.stat.exists == False }
     - { role: ansibl3.deb_atom, become: yes, when: atom.stat.exists == False }
+    - { role: syncthing, become: yes }
 
   post_tasks:
     - name: Change default shell to zsh
