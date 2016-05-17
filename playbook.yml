@@ -48,7 +48,6 @@
     - { role: nexeck.docker, become: yes, when: docker.stat.exists == False }
     - { role: rallen-temp.ansible-zsh, when: zsh.stat.exists == False }
     - { role: vcabourdin.chrome, become: yes, when: chrome.stat.exists == False }
-    - { role: hutchic.btsync, become: yes, when: btsync_webui.user is defined and btsync.stat.exists == False }
     - { role: ansibl3.deb_atom, become: yes, when: atom.stat.exists == False }
 
   post_tasks:
